@@ -24,7 +24,12 @@ public class Jugador {
         boolean res = false;
         int cont = 0;
         int[] guarda = ficha.getPos();
+        boolean lookn = false;
+        boolean lookph = false;
+        boolean looknp = false;
+        for (Ficha a : fichas) {
 
+        }
         return res;
     }
 
@@ -53,8 +58,20 @@ public class Jugador {
     private boolean isThereNext(int[] guarda) {
         boolean res = false;
         for (Ficha a : fichas) {
-
+            if (a.getPos().equals(guarda)) {
+                res = true;
+            }
         }
+        return res;
+    }
+
+    private int[] addOne(int[] guarda) {
+        int[] res = { guarda[0] + 1, guarda[1] + 1 };
+        return res;
+    }
+
+    private int[] resOne(int[] guarda) {
+        int[] res = { guarda[0] - 1, guarda[1] - 1 };
         return res;
     }
 }
