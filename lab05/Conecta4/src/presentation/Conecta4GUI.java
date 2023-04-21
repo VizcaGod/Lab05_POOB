@@ -2,10 +2,10 @@ package presentation;
 
 import java.awt.*;
 import javax.swing.*;
-
-import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+
+import static jdk.internal.net.http.common.Utils.close;
 
 public class Conecta4GUI extends javax.swing.JFrame {
     private JMenuBar menuB;
@@ -34,7 +34,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
     }
 
     public void prepareActions(){
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        closeAction();
         prepareActionsMenu();
     }
 
@@ -60,7 +60,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
     private void prepareActionsMenu() {
         salir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                confirmateClose();
+                confirmClose();
             }
         });
 
@@ -75,13 +75,27 @@ public class Conecta4GUI extends javax.swing.JFrame {
                 saveAction();
             }
         });
+
     }
 
-    private void confirmateClose() {
-        int valor = JOptionPane.showConfirmDialog(this, "�Desea cerrar la apliacion?", "Advertencia",
+    private void confirmClose() {
+        int valor = JOptionPane.showConfirmDialog(this, "Desea cerrar la apliacion?", "Advertencia",
                 JOptionPane.YES_NO_OPTION);
         if (valor == JOptionPane.YES_OPTION) {
             System.exit(0);
+        }
+    }
+
+    private void closeAction(){
+        try {
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    confirmClose();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
