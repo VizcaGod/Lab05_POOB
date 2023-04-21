@@ -24,6 +24,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
         prepareElements();
         prepareElementsMenu();
         prepareActions();
+        prepareElementsBoard();
 
     }
     public void prepareElements(){
@@ -54,6 +55,9 @@ public class Conecta4GUI extends javax.swing.JFrame {
         menuB.add(opciones);
 
         setJMenuBar(menuB);
+
+
+
     }
 
 
@@ -66,7 +70,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
         abrir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                openAction();
+                openActiont();
             }
         });
 
@@ -76,6 +80,20 @@ public class Conecta4GUI extends javax.swing.JFrame {
             }
         });
 
+    }
+
+
+    private void prepareElementsBoard(){
+        JPanel board = new JPanel();
+        board.setLayout(new GridLayout(6,7));
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 7; j++){
+                JButton button = new JButton();
+                button.setBackground(Color.WHITE);
+                board.add(button);
+            }
+        }
+        add(board);
     }
 
     private void confirmClose() {
@@ -112,11 +130,35 @@ public class Conecta4GUI extends javax.swing.JFrame {
         }
     }
 
+    private void openActiont() {
+        choose = new JFileChooser();
+        int valor = choose.showOpenDialog(this);
+        if (valor == JFileChooser.APPROVE_OPTION) {
+            File file = choose.getSelectedFile();
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String linea = br.readLine();
+                while (linea != null) {
+                    System.out.println(linea);
+                    linea = br.readLine();
+                }
+                br.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void saveAction() {
         chooseSave = new JFileChooser(new File("c:\\"));
         chooseSave.setDialogTitle("Save a File");
         chooseSave.showSaveDialog(null);
     }
+
+    private void refresh(){
+        this.repaint();
+    }
+
 
     public static void main(String[] args) {
         Conecta4GUI conecta4GUI = new Conecta4GUI();
