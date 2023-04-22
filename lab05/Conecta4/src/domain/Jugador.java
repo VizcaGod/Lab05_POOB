@@ -3,6 +3,12 @@ package domain;
 import java.util.ArrayList;
 import java.awt.Color;
 
+/**
+ * The test class Jugador.
+ *
+ * @author Santiago Parra / Juan Vizcaino
+ * @version v1.0
+ */
 public class Jugador {
     private ArrayList<Ficha> fichas;
     private String name;

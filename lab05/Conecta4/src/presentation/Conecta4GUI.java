@@ -5,8 +5,6 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 
-import static jdk.internal.net.http.common.Utils.close;
-
 public class Conecta4GUI extends javax.swing.JFrame {
     private JMenuBar menuB;
     private JMenu opciones;
@@ -27,14 +25,15 @@ public class Conecta4GUI extends javax.swing.JFrame {
         prepareElementsBoard();
 
     }
-    public void prepareElements(){
+
+    public void prepareElements() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setSize(screenSize.width/2, screenSize.height/2);
+        setSize(screenSize.width / 2, screenSize.height / 2);
         setLocationRelativeTo(null);
 
     }
 
-    public void prepareActions(){
+    public void prepareActions() {
         closeAction();
         prepareActionsMenu();
     }
@@ -56,10 +55,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
         setJMenuBar(menuB);
 
-
-
     }
-
 
     private void prepareActionsMenu() {
         salir.addActionListener(new ActionListener() {
@@ -82,12 +78,11 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
     }
 
-
-    private void prepareElementsBoard(){
+    private void prepareElementsBoard() {
         JPanel board = new JPanel();
-        board.setLayout(new GridLayout(6,7));
-        for(int i = 0; i < 6; i++){
-            for(int j = 0; j < 7; j++){
+        board.setLayout(new GridLayout(6, 7));
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
                 JButton button = new JButton();
                 button.setBackground(Color.WHITE);
                 board.add(button);
@@ -104,7 +99,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
         }
     }
 
-    private void closeAction(){
+    private void closeAction() {
         try {
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             addWindowListener(new WindowAdapter() {
@@ -155,10 +150,9 @@ public class Conecta4GUI extends javax.swing.JFrame {
         chooseSave.showSaveDialog(null);
     }
 
-    private void refresh(){
+    private void refresh() {
         this.repaint();
     }
-
 
     public static void main(String[] args) {
         Conecta4GUI conecta4GUI = new Conecta4GUI();
