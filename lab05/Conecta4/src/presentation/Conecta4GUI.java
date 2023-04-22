@@ -5,19 +5,23 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 
-import static jdk.internal.net.http.common.Utils.close;
-
 public class Conecta4GUI extends javax.swing.JFrame {
     private JMenuBar menuB;
     private JMenu opciones;
-
+    private JMenu edit;
     private JMenuItem nuevo;
     private JMenuItem abrir;
     private JMenuItem salvar;
     private JMenuItem salir;
+    private JMenuItem cambiarColorTablero;
+    private JPopupMenu colorFichas;
+    private JMenuItem cambiarColorFichas1;
+    private JMenuItem cambiarColorFichas2;
+    private JPanel board;
 
     private JFileChooser choose;
     private JFileChooser chooseSave;
+    //private JMenuItem cambiarColor;
 
     public Conecta4GUI() {
         setTitle("Conecta 4");
@@ -41,6 +45,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
     private void prepareElementsMenu() {
         menuB = new JMenuBar();
+        edit = new JMenu("Editar");
         opciones = new JMenu("Opciones");
 
         nuevo = new JMenuItem("Nuevo");
@@ -48,11 +53,25 @@ public class Conecta4GUI extends javax.swing.JFrame {
         salvar = new JMenuItem("Salvar");
         salir = new JMenuItem("Salir");
 
+        //cambiarColor = new JMenuItem("Cambiar Color");
+        cambiarColorTablero = new JMenuItem("Color del Tablero");
+        colorFichas = new JPopupMenu("Color de las fichas");
+        cambiarColorFichas1 = new JMenuItem("Color de las fichas del jugador 1");
+        cambiarColorFichas2 = new JMenuItem("Color de las fichas del jugador 2");
+
         opciones.add(nuevo);
         opciones.add(abrir);
         opciones.add(salvar);
         opciones.add(salir);
         menuB.add(opciones);
+
+        colorFichas.add(cambiarColorFichas1);
+        colorFichas.add(cambiarColorFichas2);
+        edit.add(cambiarColorTablero);
+        edit.add(colorFichas);
+
+        menuB.add(edit);
+
 
         setJMenuBar(menuB);
 
@@ -80,11 +99,50 @@ public class Conecta4GUI extends javax.swing.JFrame {
             }
         });
 
+        nuevo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                newAction();
+            }
+        });
+
+
+        cambiarColorFichas1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                changeColorAction();
+            }
+        });
+
+
+        cambiarColorFichas2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                changeColorAction();
+            }
+        });
+
+
+        cambiarColorTablero.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                changeColorAction();
+            }
+        });
+
+
+
+
+
+    }
+
+    private void newAction() {
+        int valor = JOptionPane.showConfirmDialog(this, "Desea crear un nuevo juego?", "Advertencia",
+                JOptionPane.YES_NO_OPTION);
+        if (valor == JOptionPane.YES_OPTION) {
+            //TODO
+        }
     }
 
 
     private void prepareElementsBoard(){
-        JPanel board = new JPanel();
+        board = new JPanel();
         board.setLayout(new GridLayout(6,7));
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 7; j++){
@@ -159,6 +217,13 @@ public class Conecta4GUI extends javax.swing.JFrame {
         this.repaint();
     }
 
+    private void changeColorAction(){
+        Color color = JColorChooser.showDialog(this, "Seleccione un color", Color.BLACK);
+        if(color != null){
+            this.getContentPane().setBackground(color);
+            refresh();
+        }
+    }
 
     public static void main(String[] args) {
         Conecta4GUI conecta4GUI = new Conecta4GUI();
