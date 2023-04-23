@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.awt.Color;
 
 /**
- * The test class Jugador.
+ * The class Jugador.
  *
  * @author Santiago Parra / Juan Vizcaino
  * @version v1.0

@@ -7,6 +7,7 @@ package domain;
  * @version v1.0
  */
 public class Ficha {
+
     private int posx, posy;
 
     /**
