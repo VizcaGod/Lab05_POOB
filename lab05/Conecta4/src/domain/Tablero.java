@@ -12,10 +12,12 @@ import java.awt.Color;
 public class Tablero {
     private ArrayList<Jugador> jugadores;
     private int turno;
+    private int turnoT;
 
     public Tablero() {
         jugadores = new ArrayList<Jugador>();
         turno = 0;
+        turnoT = 1;
     }
 
     public void addJugador(String name, Color color, int turno) throws Conecta4Exception {
@@ -38,10 +40,8 @@ public class Tablero {
         }
         if (fichab != null) {
             jugadores.get(turno).play(x, y);
-            ;
-
         } else {
-            // NO_SE_PUEDE_COLOCAR_AQUI
+            throw new Conecta4Exception(Conecta4Exception.NO_SE_PUEDE_COLOCAR_AQUI); // NO_SE_PUEDE_COLOCAR_AQUI
         }
 
         changeTurn();
@@ -53,6 +53,7 @@ public class Tablero {
             turno = 0;
         }
         turno += 1;
+        turnoT += 1;
     }
 
     public String getInTurnPlayerName() {

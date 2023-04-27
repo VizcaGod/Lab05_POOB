@@ -1,9 +1,14 @@
 package presentation;
 
-import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
-import java.io.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 public class Conecta4GUI extends javax.swing.JFrame {
     private JMenuBar menuB;
@@ -65,15 +70,15 @@ public class Conecta4GUI extends javax.swing.JFrame {
         opciones.add(salir);
         menuB.add(opciones);
 
-        colorFichas.add(cambiarColorFichas1);
-        colorFichas.add(cambiarColorFichas2);
+
+        edit.add(cambiarColorFichas1);
+        edit.add(cambiarColorFichas2);
         edit.add(cambiarColorTablero);
-        edit.add(colorFichas);
 
         menuB.add(edit);
 
-
         setJMenuBar(menuB);
+
 
 
 
@@ -136,7 +141,8 @@ public class Conecta4GUI extends javax.swing.JFrame {
         int valor = JOptionPane.showConfirmDialog(this, "Desea crear un nuevo juego?", "Advertencia",
                 JOptionPane.YES_NO_OPTION);
         if (valor == JOptionPane.YES_OPTION) {
-            //TODO
+            board.removeAll();
+            prepareElementsBoard();
         }
     }
 
@@ -219,10 +225,16 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
     private void changeColorAction(){
         Color color = JColorChooser.showDialog(this, "Seleccione un color", Color.BLACK);
-        if(color != null){
-            this.getContentPane().setBackground(color);
-            refresh();
+        Component[] components = board.getComponents();
+        for(Component component : components){
+            if (component instanceof JButton) {
+                JButton button = (JButton) component;
+                button.setBackground(color);
+                refresh();
+            }
+
         }
+
     }
 
     public static void main(String[] args) {

@@ -11,6 +11,7 @@ public class Conecta4Exception extends Exception {
     public static String NO_PUEDES_EN_MISMA_POSICION = "No puede colocar la ficha en una posicion ocupada";
     public static String NO_PUEDE_TENER_MISMOS_COLORES = "ya existe un jugador con los mismos colores";
     public static String GANADOR = "Ganador : ";
+    public static String NO_SE_PUEDE_COLOCAR_AQUI = "No es posible colocar la ficha en este ";
 
     public Conecta4Exception(String message) {
         super(message);
