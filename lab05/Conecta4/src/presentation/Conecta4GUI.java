@@ -26,7 +26,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
     private JFileChooser choose;
     private JFileChooser chooseSave;
-    //private JMenuItem cambiarColor;
+    // private JMenuItem cambiarColor;
 
     public Conecta4GUI() {
         setTitle("Conecta 4");
@@ -36,14 +36,15 @@ public class Conecta4GUI extends javax.swing.JFrame {
         prepareElementsBoard();
 
     }
-    public void prepareElements(){
+
+    public void prepareElements() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setSize(screenSize.width/2, screenSize.height/2);
+        setSize(screenSize.width / 2, screenSize.height / 2);
         setLocationRelativeTo(null);
 
     }
 
-    public void prepareActions(){
+    public void prepareActions() {
         closeAction();
         prepareActionsMenu();
     }
@@ -58,7 +59,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
         salvar = new JMenuItem("Salvar");
         salir = new JMenuItem("Salir");
 
-        //cambiarColor = new JMenuItem("Cambiar Color");
+        // cambiarColor = new JMenuItem("Cambiar Color");
         cambiarColorTablero = new JMenuItem("Color del Tablero");
         colorFichas = new JPopupMenu("Color de las fichas");
         cambiarColorFichas1 = new JMenuItem("Color de las fichas del jugador 1");
@@ -70,7 +71,6 @@ public class Conecta4GUI extends javax.swing.JFrame {
         opciones.add(salir);
         menuB.add(opciones);
 
-
         edit.add(cambiarColorFichas1);
         edit.add(cambiarColorFichas2);
         edit.add(cambiarColorTablero);
@@ -78,12 +78,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
         menuB.add(edit);
 
         setJMenuBar(menuB);
-
-
-
-
     }
-
 
     private void prepareActionsMenu() {
         salir.addActionListener(new ActionListener() {
@@ -110,13 +105,11 @@ public class Conecta4GUI extends javax.swing.JFrame {
             }
         });
 
-
         cambiarColorFichas1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 changeColorAction();
             }
         });
-
 
         cambiarColorFichas2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
@@ -124,16 +117,11 @@ public class Conecta4GUI extends javax.swing.JFrame {
             }
         });
 
-
         cambiarColorTablero.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 changeColorAction();
             }
         });
-
-
-
-
 
     }
 
@@ -146,12 +134,11 @@ public class Conecta4GUI extends javax.swing.JFrame {
         }
     }
 
-
-    private void prepareElementsBoard(){
+    private void prepareElementsBoard() {
         board = new JPanel();
-        board.setLayout(new GridLayout(6,7));
-        for(int i = 0; i < 6; i++){
-            for(int j = 0; j < 7; j++){
+        board.setLayout(new GridLayout(6, 7));
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
                 JButton button = new JButton();
                 button.setBackground(Color.WHITE);
                 board.add(button);
@@ -168,7 +155,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
         }
     }
 
-    private void closeAction(){
+    private void closeAction() {
         try {
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             addWindowListener(new WindowAdapter() {
@@ -219,14 +206,14 @@ public class Conecta4GUI extends javax.swing.JFrame {
         chooseSave.showSaveDialog(null);
     }
 
-    private void refresh(){
+    private void refresh() {
         this.repaint();
     }
 
-    private void changeColorAction(){
+    private void changeColorAction() {
         Color color = JColorChooser.showDialog(this, "Seleccione un color", Color.BLACK);
         Component[] components = board.getComponents();
-        for(Component component : components){
+        for (Component component : components) {
             if (component instanceof JButton) {
                 JButton button = (JButton) component;
                 button.setBackground(color);
