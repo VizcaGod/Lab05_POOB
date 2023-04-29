@@ -9,6 +9,7 @@ package domain;
 public class Ficha {
 
     private int posx, posy;
+    private Jugador jugador;
 
     /**
      * Constructor para fichas
@@ -16,9 +17,10 @@ public class Ficha {
      * @param x
      * @param y
      */
-    public Ficha(int x, int y) {
+    public Ficha(int x, int y, Jugador jugador) {
         posx = x;
         posy = y;
+        this.jugador = jugador;
     }
 
     /**
@@ -29,5 +31,32 @@ public class Ficha {
     public int[] getPos() {
         int[] res = { posx, posy };
         return res;
+    }
+
+    /**
+     * metodo para obtener la fila de la ficha
+     * 
+     * @return
+     */
+    public int getFila() {
+        return posx;
+    }
+
+    /**
+     * metodo para obtener la columna de la ficha
+     * 
+     * @return
+     */
+    public int getColumna() {
+        return posy;
+    }
+
+    /**
+     * metodo para obtener el jugador de la ficha
+     * 
+     * @return
+     */
+    public Jugador getJugador() {
+        return jugador;
     }
 }

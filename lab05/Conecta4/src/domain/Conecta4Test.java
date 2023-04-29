@@ -15,15 +15,20 @@ import org.junit.*;
  */
 public class Conecta4Test {
     private Tablero prueba;
+    Conecta4 pruebaf;
 
     /**
      * Constructor para la clase de testeo conecta4
      */
     public Conecta4Test() {
+        pruebaf = new Conecta4();
         prueba = new Tablero();
         try {
             prueba.addJugador("Parralol", Color.BLACK, 0);
             prueba.addJugador("Vizcagod", Color.BLUE, 1);
+            pruebaf.addJugador("Parralol", Color.BLACK, 0);
+            pruebaf.addJugador("Vizcagod", Color.BLUE, 1);
+
         } catch (Conecta4Exception e) {
 
         }
@@ -38,6 +43,9 @@ public class Conecta4Test {
     public void setUp() {
     }
 
+    /**
+     * verifica si pasan los turnos
+     */
     @Test
     public void shouldPassTurn() {
         String res1 = prueba.getInTurnPlayerName();
@@ -50,9 +58,16 @@ public class Conecta4Test {
         }
     }
 
+    /**
+     * verifica si juega
+     */
     @Test
     public void shouldPlay() {
-
+        try {
+            pruebaf.play(0, 7);
+        } catch (Conecta4Exception e) {
+            assertFalse(e.getMessage(), true);
+        }
     }
 
     /**
