@@ -13,7 +13,6 @@ import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
 
 public class Conecta4GUI extends javax.swing.JFrame {
 
@@ -30,7 +29,6 @@ public class Conecta4GUI extends javax.swing.JFrame {
     private JMenuItem salvar;
     private JMenuItem salir;
     private JMenuItem cambiarColorTablero;
-    private JPopupMenu colorFichas;
     private JMenuItem cambiarColorFichas1;
     private JMenuItem cambiarColorFichas2;
     private JPanel board;
@@ -80,7 +78,6 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
         // cambiarColor = new JMenuItem("Cambiar Color");
         cambiarColorTablero = new JMenuItem("Color del Tablero");
-        colorFichas = new JPopupMenu("Color de las fichas");
         cambiarColorFichas1 = new JMenuItem("Color de las fichas del jugador 1");
         cambiarColorFichas2 = new JMenuItem("Color de las fichas del jugador 2");
 
@@ -229,19 +226,6 @@ public class Conecta4GUI extends javax.swing.JFrame {
         }
     }
 
-    private void openAction() {
-        choose = new JFileChooser();
-        choose.setVisible(true);
-        int action = choose.showOpenDialog(abrir);
-        if (action == JFileChooser.APPROVE_OPTION) {
-            File files = choose.getSelectedFile();
-            JOptionPane.showMessageDialog(abrir,
-                    "El archivo de nombre " + files.getName() + " que trata de abrir en la ruta " + files
-                            + "\n NO se pudo abrir ya que esta la funcion se encuentra en construccion.",
-                    "Advertencia", JOptionPane.YES_NO_OPTION);
-        }
-    }
-
     private void openActiont() {
         choose = new JFileChooser();
         int valor = choose.showOpenDialog(this);
@@ -274,7 +258,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
     private void changeColorAction() {
         Color color = JColorChooser.showDialog(this, "Seleccione un color", Color.BLACK);
         background = color;
-        if (juego.getAllTurns() == 1) {
+        if (juego.getAllTurns() > 1) {
             JOptionPane.showMessageDialog(null, "No es posible cambiar de color, solo puedes antes del primer turno");
         } else {
             Component[] components = board.getComponents();
