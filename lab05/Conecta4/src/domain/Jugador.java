@@ -40,6 +40,10 @@ public class Jugador {
         fichas.add(ficha);
     }
 
+    public void changeColor(Color a) {
+        color = a;
+    }
+
     /**
      * metodo para obtener las fichas del jugador
      * 

@@ -1,5 +1,7 @@
 package domain;
 
+import java.awt.Color;
+
 /**
  * The test class Ficha.
  *
@@ -34,6 +36,13 @@ public class Ficha {
     }
 
     /**
+     * cambia el color
+     */
+    public void changeColor(Color a) {
+        jugador.changeColor(a);
+    }
+
+    /**
      * metodo para obtener la fila de la ficha
      * 
      * @return
@@ -58,5 +67,14 @@ public class Ficha {
      */
     public Jugador getJugador() {
         return jugador;
+    }
+
+    /**
+     * Retorna el color de la ficha
+     * 
+     * @return
+     */
+    public Color getColor() {
+        return jugador.getColor();
     }
 }

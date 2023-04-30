@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.awt.Color;
 
 /**
@@ -22,8 +23,28 @@ public class Tablero {
      */
     public Tablero() {
         jugadores = new ArrayList<Jugador>();
+        fichas = new ArrayList<Ficha>();
         turno = 0;
         turnoT = 1;
+    }
+
+    public void changeColor(Color a, int jugador) throws Conecta4Exception {
+        if (turnoT == 1) {
+            for (Jugador xd : jugadores) {
+                if (a == xd.getColor()) {
+                    throw new Conecta4Exception(Conecta4Exception.NO_PUEDE_TENER_MISMOS_COLORES);
+                }
+            }
+            jugadores.get(jugador - 1).changeColor(a);
+            Jugador c = jugadores.get(jugador - 1);
+            for (Ficha b : fichas) {
+                if (b.getJugador().equals(c)) {
+                    b.changeColor(a);
+                }
+            }
+        } else {
+            throw new Conecta4Exception(Conecta4Exception.NO_PUEDE_CAMBIAR_DE_COLOR);
+        }
     }
 
     /**
@@ -54,25 +75,29 @@ public class Tablero {
         Ficha fichab = null;
         boolean xd = false;
         for (Jugador a : jugadores) {
-            if (a.getFichas().size() != 0) {
+            if (a.getFichas().size() != 0 || turnoT > 1) {
                 for (Ficha b : a.getFichas()) {
-                    if (val.equals(b.getPos()))
+                    if (Arrays.equals(val, b.getPos())) {
+
                         throw new Conecta4Exception(Conecta4Exception.NO_PUEDES_EN_MISMA_POSICION); // NO_PUEDES_EN_MISMA_POSICION
-                    if (x == b.getPos()[0] && y == b.getPos()[1] - 1 || y == 7)
+                    }
+                    if (x == b.getPos()[0] - 1 && y == b.getPos()[1] || x == 6)
                         fichab = b;
                 }
             } else {
-                xd = true;
+                if (x == 6)
+                    xd = true;
+
             }
         }
         if (fichab != null || xd) {
             jugadores.get(turno).play(x, y);
         } else {
+
             throw new Conecta4Exception(Conecta4Exception.NO_SE_PUEDE_COLOCAR_AQUI); // NO_SE_PUEDE_COLOCAR_AQUI
         }
-
-        changeTurn();
         combinarFichas();
+
         try {
             gano = winning(fichas, this);
         } catch (Exception e) {
@@ -87,9 +112,14 @@ public class Tablero {
     public void changeTurn() {
         if (turno == 1) {
             turno = 0;
+        } else {
+            turno += 1;
         }
-        turno += 1;
         turnoT += 1;
+    }
+
+    public int getTurnoT() {
+        return turnoT;
     }
 
     /**
@@ -115,7 +145,7 @@ public class Tablero {
                     break;
                 }
             }
-            if (count >= 4) {
+            if (count > 4) {
                 return true;
             }
 
@@ -129,7 +159,7 @@ public class Tablero {
                     break;
                 }
             }
-            if (count >= 4) {
+            if (count > 4) {
                 return true;
             }
 
@@ -143,7 +173,7 @@ public class Tablero {
                     break;
                 }
             }
-            if (count >= 4) {
+            if (count > 4) {
                 return true;
             }
 
@@ -157,7 +187,7 @@ public class Tablero {
                     break;
                 }
             }
-            if (count >= 4) {
+            if (count > 4) {
                 return true;
             }
         }
@@ -170,13 +200,12 @@ public class Tablero {
      * @return
      */
     public String getInTurnPlayerName() {
-        String res = "falla";
-        if (turno == 0) {
-            res = jugadores.get(0).getName();
-        }
-        if (turno == 1) {
-            res = jugadores.get(1).getName();
-        }
+        String res = jugadores.get(turno).getName();
+        return res;
+    }
+
+    public Color getInTurnColor() {
+        Color res = jugadores.get(turno).getColor();
         return res;
     }
 

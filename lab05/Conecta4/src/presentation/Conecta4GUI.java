@@ -1,6 +1,10 @@
 package presentation;
 
 import javax.swing.*;
+
+import domain.Conecta4;
+import domain.Conecta4Exception;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,8 +13,15 @@ import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 public class Conecta4GUI extends javax.swing.JFrame {
+
+    private Conecta4 juego;
+
+    private Color background;
+
+    // ATRIBUTOS GRAFICOS
     private JMenuBar menuB;
     private JMenu opciones;
     private JMenu edit;
@@ -41,6 +52,14 @@ public class Conecta4GUI extends javax.swing.JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setSize(screenSize.width / 2, screenSize.height / 2);
         setLocationRelativeTo(null);
+        juego = new Conecta4();
+        background = Color.WHITE;
+        try {
+            juego.addJugador("J1", Color.BLUE, 0);
+            juego.addJugador("J2", Color.RED, 1);
+        } catch (Conecta4Exception e) {
+
+        }
 
     }
 
@@ -107,13 +126,13 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
         cambiarColorFichas1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                changeColorAction();
+                changeColorActionJ1();
             }
         });
 
         cambiarColorFichas2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                changeColorAction();
+                changeColorActionJ2();
             }
         });
 
@@ -136,15 +155,57 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
     private void prepareElementsBoard() {
         board = new JPanel();
-        board.setLayout(new GridLayout(6, 7));
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
+        board.setLayout(new GridLayout(7, 8));
+        for (int i = 0; i <= 6; i++) {
+            for (int j = 0; j <= 7; j++) {
                 JButton button = new JButton();
-                button.setBackground(Color.WHITE);
+                int x = i;
+                int y = j;
+                button.setBackground(checkIfContainsChip(i, j));
+                button.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        try {
+                            jugar(x, y);
+                            button.setBackground(getInTurnColor());
+                            changeTurn();
+                            button.repaint();
+                            revalida();
+                        } catch (Conecta4Exception e) {
+                            JOptionPane.showMessageDialog(null, e.getMessage());
+                        }
+                    }
+                });
                 board.add(button);
             }
         }
         add(board);
+    }
+
+    public void jugar(int x, int y) throws Conecta4Exception {
+        juego.play(x, y);
+    }
+
+    public void changeTurn() {
+        juego.changeTurn();
+    }
+
+    public Color getInTurnColor() {
+        return juego.getInTurnColor();
+    }
+
+    public void revalida() {
+        revalidate();
+        refresh();
+    }
+
+    private Color checkIfContainsChip(int x, int y) {
+        Color res = background;
+        for (int i = 0; i < juego.getFichas().size(); i++) {
+            if (juego.getFichas().get(i).getFila() == x && juego.getFichas().get(i).getColumna() == y) {
+                res = juego.getFichas().get(i).getColor();
+            }
+        }
+        return res;
     }
 
     private void confirmClose() {
@@ -212,16 +273,56 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
     private void changeColorAction() {
         Color color = JColorChooser.showDialog(this, "Seleccione un color", Color.BLACK);
+        background = color;
+        if (juego.getAllTurns() == 1) {
+            JOptionPane.showMessageDialog(null, "No es posible cambiar de color, solo puedes antes del primer turno");
+        } else {
+            Component[] components = board.getComponents();
+            for (Component component : components) {
+                if (component instanceof JButton) {
+                    JButton button = (JButton) component;
+                    button.setBackground(background);
+                    refresh();
+                }
+
+            }
+        }
+    }
+
+    private void changeColorActionJ1() {
+        Color color = JColorChooser.showDialog(this, "Seleccione un color", Color.BLACK);
+        try {
+            juego.changeColor(color, 1);
+        } catch (Conecta4Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
         Component[] components = board.getComponents();
         for (Component component : components) {
+            if (component instanceof JPanel) {
+                remove(component);
+            }
+        }
+        revalidate();
+        refresh();
+    }
+
+    private void changeColorActionJ2() {
+        Color color = JColorChooser.showDialog(this, "Seleccione un color", Color.BLACK);
+        try {
+            juego.changeColor(color, 2);
+
+        } catch (Conecta4Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        for (Component component : board.getComponents()) {
             if (component instanceof JButton) {
-                JButton button = (JButton) component;
-                button.setBackground(color);
-                refresh();
+                remove(component);
             }
 
         }
-
+        revalidate();
+        refresh();
     }
 
     public static void main(String[] args) {

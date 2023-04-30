@@ -45,6 +45,24 @@ public class Conecta4 {
         }
     }
 
+    public void changeTurn() {
+        tablero.changeTurn();
+    }
+
+    /**
+     * cambia el color de un jugador en especifico
+     * 
+     * @param a
+     * @param jugador
+     */
+    public void changeColor(Color a, int jugador) throws Conecta4Exception {
+        tablero.changeColor(a, jugador);
+    }
+
+    public Color getInTurnColor() {
+        return tablero.getInTurnColor();
+    }
+
     /**
      * retorna las fichas del tablero
      * 
@@ -72,4 +90,7 @@ public class Conecta4 {
         return tablero.getTurno();
     }
 
+    public int getAllTurns() {
+        return tablero.getTurnoT();
+    }
 }
