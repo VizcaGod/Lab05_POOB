@@ -14,6 +14,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
+/**
+ * The type Conecta 4 gui.
+ */
 public class Conecta4GUI extends javax.swing.JFrame {
 
     private Conecta4 juego;
@@ -37,6 +40,9 @@ public class Conecta4GUI extends javax.swing.JFrame {
     private JFileChooser chooseSave;
     // private JMenuItem cambiarColor;
 
+    /**
+     * Instantiates a new Conecta 4 gui.
+     */
     public Conecta4GUI() {
         setTitle("Conecta 4");
         prepareElements();
@@ -46,6 +52,9 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Prepare elements.
+     */
     public void prepareElements() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setSize(screenSize.width / 2, screenSize.height / 2);
@@ -61,11 +70,18 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Prepare actions.
+     */
     public void prepareActions() {
         closeAction();
         prepareActionsMenu();
     }
 
+
+    /**
+     * Prepare elements menu.
+     */
     private void prepareElementsMenu() {
         menuB = new JMenuBar();
         edit = new JMenu("Editar");
@@ -96,6 +112,9 @@ public class Conecta4GUI extends javax.swing.JFrame {
         setJMenuBar(menuB);
     }
 
+    /**
+     *  Prepare actions menu.
+     */
     private void prepareActionsMenu() {
         salir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
@@ -141,6 +160,9 @@ public class Conecta4GUI extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Crea un dialogo para confirmar el reinicio del juego.
+     */
     private void newAction() {
         int valor = JOptionPane.showConfirmDialog(this, "Desea crear un nuevo juego?", "Advertencia",
                 JOptionPane.YES_NO_OPTION);
@@ -148,6 +170,7 @@ public class Conecta4GUI extends javax.swing.JFrame {
             board.removeAll();
             prepareElementsBoard();
         }
+        refresh();
     }
 
     private void prepareElementsBoard() {
@@ -178,23 +201,48 @@ public class Conecta4GUI extends javax.swing.JFrame {
         add(board);
     }
 
+    /**
+     * Jugar.
+     *
+     * @param x the x
+     * @param y the y
+     * @throws Conecta4Exception the conecta 4 exception
+     */
     public void jugar(int x, int y) throws Conecta4Exception {
         juego.play(x, y);
     }
 
+    /**
+     * Change turn.
+     */
     public void changeTurn() {
         juego.changeTurn();
     }
 
+    /**
+     * Gets in turn color.
+     *
+     * @return the in turn color
+     */
     public Color getInTurnColor() {
         return juego.getInTurnColor();
     }
 
+    /**
+     * Revalida.
+     */
     public void revalida() {
         revalidate();
         refresh();
     }
 
+
+    /**
+     * Verifica si la posicion esta ocupada por una ficha.
+     * @param x
+     * @param y
+     * @return
+     */
     private Color checkIfContainsChip(int x, int y) {
         Color res = background;
         for (int i = 0; i < juego.getFichas().size(); i++) {
@@ -205,6 +253,10 @@ public class Conecta4GUI extends javax.swing.JFrame {
         return res;
     }
 
+
+    /**
+     * Accion que genera un mensaje de confirmacion para cerrar ka ventana.
+     */
     private void confirmClose() {
         int valor = JOptionPane.showConfirmDialog(this, "Desea cerrar la apliacion?", "Advertencia",
                 JOptionPane.YES_NO_OPTION);
@@ -213,6 +265,10 @@ public class Conecta4GUI extends javax.swing.JFrame {
         }
     }
 
+
+    /**
+     * Accion que define el comportamiento al cerrar el juego.
+     */
     private void closeAction() {
         try {
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -226,6 +282,10 @@ public class Conecta4GUI extends javax.swing.JFrame {
         }
     }
 
+
+    /**
+     * Accion que abre un archivo.
+     */
     private void openActiont() {
         choose = new JFileChooser();
         int valor = choose.showOpenDialog(this);
@@ -245,6 +305,10 @@ public class Conecta4GUI extends javax.swing.JFrame {
         }
     }
 
+
+    /**
+     * Accion que guarda un archivo.
+     */
     private void saveAction() {
         chooseSave = new JFileChooser(new File("c:\\"));
         chooseSave.setDialogTitle("Save a File");
@@ -255,6 +319,10 @@ public class Conecta4GUI extends javax.swing.JFrame {
         this.repaint();
     }
 
+
+    /**
+     * Accion que cambia el color.
+     */
     private void changeColorAction() {
         Color color = JColorChooser.showDialog(this, "Seleccione un color", Color.BLACK);
         background = color;
@@ -309,6 +377,11 @@ public class Conecta4GUI extends javax.swing.JFrame {
         refresh();
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         Conecta4GUI conecta4GUI = new Conecta4GUI();
         conecta4GUI.setVisible(true);

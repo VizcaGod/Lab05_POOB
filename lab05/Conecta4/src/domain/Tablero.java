@@ -28,6 +28,13 @@ public class Tablero {
         turnoT = 1;
     }
 
+    /**
+     * Change color.
+     *
+     * @param a       the a
+     * @param jugador the jugador
+     * @throws Conecta4Exception the conecta 4 exception
+     */
     public void changeColor(Color a, int jugador) throws Conecta4Exception {
         if (turnoT == 1) {
             for (Jugador xd : jugadores) {
@@ -49,11 +56,11 @@ public class Tablero {
 
     /**
      * metodo para agregar un jugador
-     * 
-     * @param name
-     * @param color
-     * @param turno
-     * @throws Conecta4Exception
+     *
+     * @param name  the name
+     * @param color the color
+     * @param turno the turno
+     * @throws Conecta4Exception the conecta 4 exception
      */
     public void addJugador(String name, Color color, int turno) throws Conecta4Exception {
         isThereSame(color);
@@ -63,11 +70,11 @@ public class Tablero {
 
     /**
      * metodo para realizar una jugada
-     * 
-     * @param x
-     * @param y
-     * @return
-     * @throws Conecta4Exception
+     *
+     * @param x the x
+     * @param y the y
+     * @return boolean boolean
+     * @throws Conecta4Exception the conecta 4 exception
      */
     public boolean play(int x, int y) throws Conecta4Exception {
         int[] val = { x, y };
@@ -118,16 +125,21 @@ public class Tablero {
         turnoT += 1;
     }
 
+    /**
+     * Gets turno t.
+     *
+     * @return the turno t
+     */
     public int getTurnoT() {
         return turnoT;
     }
 
     /**
      * metodo para verificar si alguien ha ganado
-     * 
-     * @param chips
-     * @param board
-     * @return
+     *
+     * @param chips the chips
+     * @param board the board
+     * @return boolean boolean
      */
     public static boolean winning(ArrayList<Ficha> chips, Tablero board) {
         for (Ficha chip : chips) {
@@ -196,14 +208,19 @@ public class Tablero {
 
     /**
      * metodo para obtener el nombre del jugador en turno
-     * 
-     * @return
+     *
+     * @return in turn player name
      */
     public String getInTurnPlayerName() {
         String res = jugadores.get(turno).getName();
         return res;
     }
 
+    /**
+     * Gets in turn color.
+     *
+     * @return the in turn color
+     */
     public Color getInTurnColor() {
         Color res = jugadores.get(turno).getColor();
         return res;
@@ -211,8 +228,8 @@ public class Tablero {
 
     /**
      * retorna el turno actual
-     * 
-     * @return
+     *
+     * @return turno turno
      */
     public int getTurno() {
         return turno;
@@ -220,8 +237,8 @@ public class Tablero {
 
     /**
      * metodo para obtener todos los turnos
-     * 
-     * @return
+     *
+     * @return turnos totales
      */
     public int getTurnosTotales() {
         return turnoT;
@@ -279,6 +296,11 @@ public class Tablero {
         return res;
     }
 
+    /**
+     * Gets fichas.
+     *
+     * @return the fichas
+     */
     public ArrayList<Ficha> getFichas() {
         return fichas;
     }

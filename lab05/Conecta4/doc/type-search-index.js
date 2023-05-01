@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"domain","l":"Conecta4"},{"p":"domain","l":"Conecta4Exception"},{"p":"presentation","l":"Conecta4GUI"},{"p":"domain","l":"Conecta4Test"},{"p":"domain","l":"Ficha"},{"p":"domain","l":"Jugador"},{"p":"domain","l":"Tablero"}];updateSearchResults();

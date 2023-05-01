@@ -17,10 +17,10 @@ public class Jugador {
 
     /**
      * metodo constructor para la clase Jugador
-     * 
-     * @param name
-     * @param color
-     * @param turno
+     *
+     * @param name  the name
+     * @param color the color
+     * @param turno the turno
      */
     public Jugador(String name, Color color, int turno) {
         fichas = new ArrayList<Ficha>();
@@ -31,23 +31,28 @@ public class Jugador {
 
     /**
      * metodo para poder jugar
-     * 
-     * @param x
-     * @param y
+     *
+     * @param x the x
+     * @param y the y
      */
     public void play(int x, int y) {
         Ficha ficha = new Ficha(x, y, this);
         fichas.add(ficha);
     }
 
+    /**
+     * Change color.
+     *
+     * @param a the a
+     */
     public void changeColor(Color a) {
         color = a;
     }
 
     /**
      * metodo para obtener las fichas del jugador
-     * 
-     * @return
+     *
+     * @return fichas fichas
      */
     public ArrayList<Ficha> getFichas() {
         return fichas;
@@ -55,8 +60,8 @@ public class Jugador {
 
     /**
      * metodo para obtener el nombre del jugador
-     * 
-     * @return
+     *
+     * @return name name
      */
     public String getName() {
         return name;
@@ -64,8 +69,8 @@ public class Jugador {
 
     /**
      * metodo para obtener el color del jugador
-     * 
-     * @return
+     *
+     * @return color color
      */
     public Color getColor() {
         return color;
@@ -73,8 +78,8 @@ public class Jugador {
 
     /**
      * metodo para obtener el turno del jugador
-     * 
-     * @return
+     *
+     * @return turno turno
      */
     public int getTurno() {
         return turno;
@@ -82,8 +87,8 @@ public class Jugador {
 
     /**
      * metodo para obtener el puntaje del jugador
-     * 
-     * @return
+     *
+     * @return score score
      */
     public int getScore() {
         return fichas.size();

@@ -17,6 +17,9 @@ import static org.junit.Assert.assertTrue;
  */
 public class Conecta4Test {
     private Tablero prueba;
+    /**
+     * The Pruebaf.
+     */
     Conecta4 pruebaf;
 
     /**
@@ -38,7 +41,7 @@ public class Conecta4Test {
 
     /**
      * Sets up the test fixture.
-     *
+     * <p>
      * Called before every test case method.
      */
     @Before
@@ -74,7 +77,7 @@ public class Conecta4Test {
 
     /**
      * Tears down the test fixture.
-     *
+     * <p>
      * Called after every test case method.
      */
     @After

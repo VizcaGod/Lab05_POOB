@@ -15,9 +15,10 @@ public class Ficha {
 
     /**
      * Constructor para fichas
-     * 
-     * @param x
-     * @param y
+     *
+     * @param x       the x
+     * @param y       the y
+     * @param jugador the jugador
      */
     public Ficha(int x, int y, Jugador jugador) {
         posx = x;
@@ -27,8 +28,8 @@ public class Ficha {
 
     /**
      * Retorna la posicion de la ficha
-     * 
-     * @return
+     *
+     * @return int [ ]
      */
     public int[] getPos() {
         int[] res = { posx, posy };
@@ -37,6 +38,8 @@ public class Ficha {
 
     /**
      * cambia el color
+     *
+     * @param a the a
      */
     public void changeColor(Color a) {
         jugador.changeColor(a);
@@ -44,8 +47,8 @@ public class Ficha {
 
     /**
      * metodo para obtener la fila de la ficha
-     * 
-     * @return
+     *
+     * @return fila fila
      */
     public int getFila() {
         return posx;
@@ -53,8 +56,8 @@ public class Ficha {
 
     /**
      * metodo para obtener la columna de la ficha
-     * 
-     * @return
+     *
+     * @return columna columna
      */
     public int getColumna() {
         return posy;
@@ -62,8 +65,8 @@ public class Ficha {
 
     /**
      * metodo para obtener el jugador de la ficha
-     * 
-     * @return
+     *
+     * @return jugador jugador
      */
     public Jugador getJugador() {
         return jugador;
@@ -71,8 +74,8 @@ public class Ficha {
 
     /**
      * Retorna el color de la ficha
-     * 
-     * @return
+     *
+     * @return color color
      */
     public Color getColor() {
         return jugador.getColor();
